@@ -1,0 +1,79 @@
+/* lessons.component.css */
+.lessons-container {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: black;
+}
+
+.subject-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  width: 100%;
+}
+
+.subject-card {
+  width: 300px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  transition: transform 0.2s;
+}
+
+.subject-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.subject-checkbox .mat-checkbox-label {
+  color: black !important; 
+  font-weight: bold;
+}
+
+mat-card-header {
+  background-color: #1a1a1a;
+  padding: 10px;
+}
+
+mat-card-content {
+  padding: 16px;
+  color: #333333;
+}
+
+.highlight {
+  background-color: #1a1a1a !important; 
+  font-weight: bold;
+  padding: 2px;
+}
+
+.action-buttons {
+  margin-top: 20px;
+  text-align: center;
+}
+
+
+button[mat-raised-button] {
+  padding: 8px 16px;
+}
+
+/* Responsive rules */
+@media (max-width: 768px) {
+  .subject-card {
+    width: 100%;
+    max-width: 400px;
+  }
+}
+
+@media (max-width: 480px) {
+  .lessons-container {
+    padding: 10px;
+  }
+
+  .subject-card {
+    background-color: #ffffff;
+    max-width: 100%;
+  }
+}

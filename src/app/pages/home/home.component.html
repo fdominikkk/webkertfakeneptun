@@ -1,0 +1,30 @@
+<div class="home-container">
+  <h1>Üdvözlünk a Fake-Neptun rendszerben!</h1>
+
+  <mat-card class="home-card">
+    <mat-card-header>
+      <mat-card-title>Legfrissebb hírek</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p [appNewsHighlight]="'sürgős'" [innerHTML]="'Belehajtottak repülővel egy toronyba.' | highlightText:'sürgős'"></p>
+      <p [appNewsHighlight]="'általános'" [innerHTML]="'Új kurzusok elérhetők.' | highlightText:'általános'"></p>
+      <p [appNewsHighlight]="'általános'" [innerHTML]="'Ne felejtsd el a határidőket!' | highlightText:'általános'"></p>
+      <p [appNewsHighlight]="'sürgős'" [innerHTML]="'A másik toronyba is belerepültek.' | highlightText:'sürgős'"></p>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="home-card">
+    <mat-card-header>
+      <mat-card-title>Kapcsolat – SZTE TTIK</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p><strong>Cím:</strong> 6720 Szeged, Aradi vértanúk tere 1.</p>
+      <p><strong>Telefonszám:</strong> +36 62 544 000</p>
+      <p><strong>Weboldal:  </strong>
+        <a href="https://sci.u-szeged.hu" target="_blank">
+          <button mat-raised-button color="primary">sci.u-szeged.hu</button>
+        </a>
+      </p>
+    </mat-card-content>
+  </mat-card>
+</div>

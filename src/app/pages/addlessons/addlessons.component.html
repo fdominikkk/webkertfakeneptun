@@ -1,0 +1,55 @@
+<div class="add-lessons-container">
+  <h1>Tárgyfelvétel</h1>
+
+  <mat-form-field appearance="outline" class="search-bar">
+    <mat-label>Tantárgy keresése...</mat-label>
+    <input
+      matInput
+      placeholder="Tantárgy keresése..."
+      [(ngModel)]="searchText"
+      (ngModelChange)="searchText = $event"
+    >
+  </mat-form-field>
+
+  <div class="subject-list">
+    <p *ngIf="getFilteredSubjects().length === 0 && searchText" class="no-results">
+      A keresett tárgy nem található.
+    </p>
+
+  <div class="subject-list">
+    <ng-container *ngFor="let subject of getFilteredSubjects()">
+      <mat-card class="subject-card">
+        <mat-card-header>
+          <mat-card-title>{{ subject.name }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>Oktató: {{ subject.teacher }}</p>
+          <p>Kredit: {{ subject.credits }}</p>
+          <p *ngIf="selectedDates[subject.name]">
+            Felvétel dátuma: {{ selectedDates[subject.name] | date:'yyyy.MM.dd' }}
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button
+            mat-raised-button
+            color="primary"
+            [appRestrictSelection]="isSubjectSelected(subject.name)"
+            (click)="toggleDatepicker(subject.name)"
+          >
+            Felvétel
+          </button>
+          <mat-form-field *ngIf="showDatepicker[subject.name]">
+            <mat-label>Dátum választás</mat-label>
+            <input
+              matInput
+              [matDatepicker]="picker"
+              (dateChange)="onDateSelected(subject.name, $event)"
+            >
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </mat-card-actions>
+      </mat-card>
+    </ng-container>
+  </div>
+</div>

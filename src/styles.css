@@ -1,0 +1,112 @@
+/* src/styles.css */
+
+/* Alapértelmezett stílusok */
+/* styles.css */
+body, html {
+  margin: 0;
+  height: 100%;
+  background-color: #f5f5f5; /* Változtasd meg a globális hátteret, ha szükséges */
+}
+
+mat-sidenav-content {
+  background-color: #f5f5f5; /* Explicit háttérszín az összes oldalhoz */
+}
+
+
+/* Konténer stílusok */
+.container {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+}
+
+/* Közös kártya stílusok */
+mat-card {
+  background-color: gray;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  margin-bottom: 20px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+mat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+mat-card-header {
+  background-color: #f5f5f5;
+  padding: 10px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+mat-card-title {
+  font-size: 20px;
+  font-weight: bold;
+  color: #333333;
+}
+
+mat-card-content {
+  padding: 16px;
+  color: #333333;
+}
+
+mat-list-item {
+  color: #1a1a1a;
+  padding: 8px 0;
+}
+
+
+/* Címek */
+h1 {
+  text-align: center;
+  color: #333333;
+  margin-bottom: 20px;
+  font-size: 28px;
+}
+
+/* Reszponzív szabályok */
+@media (max-width: 768px) {
+  .container {
+    max-width: 100%;
+  }
+
+  mat-card {
+    width: 100%;
+    max-width: 500px;
+    color: black;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 10px;
+  }
+
+  mat-card {
+    max-width: 100%;
+  }
+
+
+  mat-card-header,
+  mat-card-content,
+  mat-card-actions {
+    padding: 8px;
+  }
+
+  mat-card-title {
+    font-size: 18px;
+  }
+
+  mat-list-item {
+    font-size: 14px;
+  }
+
+  button[mat-raised-button] {
+    padding: 6px 12px;
+    font-size: 14px;
+  }
+}

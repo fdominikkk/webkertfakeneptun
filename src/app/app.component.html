@@ -1,0 +1,22 @@
+
+<mat-sidenav-container>
+
+  <mat-sidenav #sidenav mode="side" [(opened)]="isSidenavOpen">
+    <app-menu [currentPage]="page" (selectedPage)="changePage($event)"></app-menu>
+  </mat-sidenav>
+
+
+  <mat-sidenav-content>
+
+    <mat-toolbar color="primary">
+      <button mat-icon-button (click)="toggleSidenav()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>Fake-Neptun</span>
+    </mat-toolbar>
+
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

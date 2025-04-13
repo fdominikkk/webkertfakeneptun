@@ -1,0 +1,11 @@
+<nav class="sidebar">
+  <div class="logo">
+    <h2>Fake-Neptun</h2>
+  </div>
+  <ul>
+    <li [class.active]="currentPage === 'home'" (click)="menuSwitch('home')">Főoldal</li>
+    <li [class.active]="currentPage === 'addlessons'" (click)="menuSwitch('addlessons')">Tárgyfelvétel</li>
+    <li [class.active]="currentPage === 'lessons'" (click)="menuSwitch('lessons')">Felvett Tárgyak</li>
+    <li [class.active]="currentPage === 'profile'" (click)="menuSwitch('profile')">Profil</li>
+  </ul>
+</nav>

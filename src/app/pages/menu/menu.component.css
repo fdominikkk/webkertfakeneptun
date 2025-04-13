@@ -1,0 +1,38 @@
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding-top: 16px;
+}
+
+.logo {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.logo h2 {
+  margin: 0;
+  color: #000;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  padding: 15px 20px;
+  cursor: pointer;
+  color: #000;
+  font-size: 16px;
+}
+
+li:hover {
+  background-color: #e0e0e0;
+}
+
+li.active {
+  background-color: #3f51b5; 
+  color: #fff;
+}

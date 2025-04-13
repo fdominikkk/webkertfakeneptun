@@ -1,0 +1,39 @@
+<div class="lessons-container">
+  <h1>Felvett Tárgyak</h1>
+  <div class="subject-list">
+    <ng-container *ngFor="let subject of subjects">
+      <mat-card class="subject-card">
+        <mat-card-header>
+          <mat-checkbox
+            [(ngModel)]="subject.selected"
+            [labelPosition]="'after'"
+            color="primary"
+            class="subject-checkbox">
+            {{ subject.name }}
+          </mat-checkbox>
+        </mat-card-header>
+        <mat-divider></mat-divider>
+        <mat-card-content>
+          <p>
+            <mat-chip-listbox>
+              <mat-chip class="highlight">{{ subject.day }}</mat-chip>
+            </mat-chip-listbox>
+            {{ subject.time }}
+          </p>
+          <p>Tanár: {{ subject.teacher }}</p>
+        </mat-card-content>
+      </mat-card>
+    </ng-container>
+    <div *ngIf="subjects.length === 0" class="empty-message">
+      <h2>Jelenleg nincs felvéve egyetlen tárgy sem.</h2>
+    </div>
+  </div>
+  <div class="action-buttons">
+    <button
+      mat-raised-button
+      color="warn"
+      (click)="deleteSelectedSubjects()">
+      Kijelölt tárgyak leadása
+    </button>
+  </div>
+</div>
