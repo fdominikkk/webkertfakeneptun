@@ -1,4 +1,5 @@
 #FAKE-NEPTUN A VÁLASZTOTT PROJEKTEM
+Tanárként, és diákként belépve is próbáld ki az oldalt, mert más funkciók vannak.
 # WebkertProjekt
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.6.
