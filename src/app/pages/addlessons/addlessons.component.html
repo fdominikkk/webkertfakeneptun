@@ -1,55 +1,154 @@
-<div class="add-lessons-container">
-  <h1>Tárgyfelvétel</h1>
+<div class="lessons-container">
+  <mat-spinner *ngIf="isLoading" class="loading-spinner"></mat-spinner>
+  <div *ngIf="!isLoading">
+    <!-- Feedback messages -->
+    <mat-card *ngIf="errorMessage || successMessage" class="feedback-card" [ngClass]="{'error': errorMessage, 'success': successMessage}">
+      <mat-card-content>
+        <mat-icon class="feedback-icon">{{ successMessage ? 'check_circle' : 'error_outline' }}</mat-icon>
+        {{ successMessage || errorMessage }}
+      </mat-card-content>
+    </mat-card>
 
-  <mat-form-field appearance="outline" class="search-bar">
-    <mat-label>Tantárgy keresése...</mat-label>
-    <input
-      matInput
-      placeholder="Tantárgy keresése..."
-      [(ngModel)]="searchText"
-      (ngModelChange)="searchText = $event"
-    >
-  </mat-form-field>
+    <!-- Filter Form (csak diákok számára) -->
+    <mat-card class="filter-card" *ngIf="userType === 'student'">
+      <mat-card-header>
+        <mat-card-title>Kurzusok Szűrése</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <form [formGroup]="filterForm" (ngSubmit)="onApplyFilters()">
+          <div class="filter-row">
+            <mat-form-field appearance="fill">
+              <mat-label>Kar</mat-label>
+              <input matInput formControlName="faculty" placeholder="Pl. ttik">
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+              <mat-label>Szemeszter</mat-label>
+              <input matInput formControlName="semester" placeholder="Pl. 2025-26">
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+              <mat-label>Nap</mat-label>
+              <mat-select formControlName="day">
+                <mat-option value="">Mindegy</mat-option>
+                <mat-option value="Hétfő">Hétfő</mat-option>
+                <mat-option value="Kedd">Kedd</mat-option>
+                <mat-option value="Szerda">Szerda</mat-option>
+                <mat-option value="Csütörtök">Csütörtök</mat-option>
+                <mat-option value="Péntek">Péntek</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+              <mat-label>Minimum Kredit</mat-label>
+              <input matInput type="number" formControlName="minCredits" min="0">
+            </mat-form-field>
+          </div>
+          <div class="filter-actions">
+            <button mat-raised-button color="primary" type="submit">Szűrés</button>
+            <button mat-raised-button color="accent" type="button" (click)="onResetFilters()">Szűrők Törlése</button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
 
-  <div class="subject-list">
-    <p *ngIf="getFilteredSubjects().length === 0 && searchText" class="no-results">
-      A keresett tárgy nem található.
-    </p>
+    <!-- Course Creation Form (csak tanárok számára) -->
+    <mat-card class="course-form-card" *ngIf="userType === 'teacher'">
+      <mat-card-header>
+        <mat-card-title>{{ isEditing ? 'Kurzus Szerkesztése' : 'Új Kurzus Hozzáadása' }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <form [formGroup]="courseForm" (ngSubmit)="onSubmitCourse()">
+          <div class="form-row">
+            <mat-form-field appearance="fill">
+              <mat-label>Kurzus Neve</mat-label>
+              <input matInput formControlName="name" required>
+              <mat-error *ngIf="courseForm.get('name')?.hasError('required')">Kötelező mező</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+              <mat-label>Kreditek</mat-label>
+              <input matInput type="number" formControlName="credits" required min="1">
+              <mat-error *ngIf="courseForm.get('credits')?.hasError('required')">Kötelező mező</mat-error>
+              <mat-error *ngIf="courseForm.get('credits')?.hasError('min')">Minimum 1 kredit</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+              <mat-label>Kar</mat-label>
+              <input matInput formControlName="faculty" required placeholder="Pl. ttik">
+              <mat-error *ngIf="courseForm.get('faculty')?.hasError('required')">Kötelező mező</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+              <mat-label>Szemeszter</mat-label>
+              <input matInput formControlName="semester" required placeholder="Pl. 2025-26">
+              <mat-error *ngIf="courseForm.get('semester')?.hasError('required')">Kötelező mező</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+              <mat-label>Nap</mat-label>
+              <mat-select formControlName="day" required>
+                <mat-option value="Hétfő">Hétfő</mat-option>
+                <mat-option value="Kedd">Kedd</mat-option>
+                <mat-option value="Szerda">Szerda</mat-option>
+                <mat-option value="Csütörtök">Csütörtök</mat-option>
+                <mat-option value="Péntek">Péntek</mat-option>
+              </mat-select>
+              <mat-error *ngIf="courseForm.get('day')?.hasError('required')">Kötelező mező</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+              <mat-label>Időpont</mat-label>
+              <input matInput formControlName="time" required placeholder="Pl. 10:00-12:00">
+              <mat-error *ngIf="courseForm.get('time')?.hasError('required')">Kötelező mező</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+              <mat-label>Maximális Létszám</mat-label>
+              <input matInput type="number" formControlName="maxStudents" min="1">
+              <mat-error *ngIf="courseForm.get('maxStudents')?.hasError('min')">Minimum 1</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+              <mat-label>Leírás</mat-label>
+              <textarea matInput formControlName="description"></textarea>
+            </mat-form-field>
+          </div>
+          <div class="form-actions">
+            <button mat-raised-button color="primary" type="submit" [disabled]="courseForm.invalid">
+              {{ isEditing ? 'Mentés' : 'Hozzáadás' }}
+            </button>
+            <button mat-raised-button color="warn" type="button" (click)="onCancelEdit()" *ngIf="isEditing">Mégse</button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
 
-  <div class="subject-list">
-    <ng-container *ngFor="let subject of getFilteredSubjects()">
-      <mat-card class="subject-card">
-        <mat-card-header>
-          <mat-card-title>{{ subject.name }}</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <p>Oktató: {{ subject.teacher }}</p>
-          <p>Kredit: {{ subject.credits }}</p>
-          <p *ngIf="selectedDates[subject.name]">
-            Felvétel dátuma: {{ selectedDates[subject.name] | date:'yyyy.MM.dd' }}
-          </p>
-        </mat-card-content>
-        <mat-card-actions>
-          <button
-            mat-raised-button
-            color="primary"
-            [appRestrictSelection]="isSubjectSelected(subject.name)"
-            (click)="toggleDatepicker(subject.name)"
-          >
-            Felvétel
-          </button>
-          <mat-form-field *ngIf="showDatepicker[subject.name]">
-            <mat-label>Dátum választás</mat-label>
-            <input
-              matInput
-              [matDatepicker]="picker"
-              (dateChange)="onDateSelected(subject.name, $event)"
-            >
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-          </mat-form-field>
-        </mat-card-actions>
-      </mat-card>
-    </ng-container>
+    <!-- Course List -->
+    <h1>Tárgyak Felvétele</h1>
+    <div class="subject-list">
+      <ng-container *ngFor="let subject of courses">
+        <mat-card class="subject-card">
+          <mat-card-header>
+            <mat-card-title>{{ subject.name }}</mat-card-title>
+          </mat-card-header>
+          <mat-divider></mat-divider>
+          <mat-card-content>
+            <p>
+              <mat-chip-listbox>
+                <mat-chip class="highlight">{{ subject.day }}</mat-chip>
+              </mat-chip-listbox>
+              {{ subject.time }}
+            </p>
+            <p>Tanár: {{ subject.teacherId }}</p>
+            <p>Kredit: {{ subject.credits }}</p>
+            <p>Szemeszter: {{ subject.semester }}</p>
+            <p>Kar: {{ subject.faculty }}</p>
+          </mat-card-content>
+          <mat-card-actions *ngIf="userType === 'student'">
+            <button mat-button color="primary" (click)="onCourseSelect(subject.id)" [disabled]="isCourseEnrolled(subject)">
+              Felvétel
+            </button>
+          </mat-card-actions>
+          <mat-card-actions *ngIf="userType === 'teacher'">
+            <button mat-button color="accent" (click)="onEditCourse(subject)">Szerkesztés</button>
+            <button mat-button color="warn" (click)="onCourseDelete(subject.id)">Törlés</button>
+          </mat-card-actions>
+        </mat-card>
+      </ng-container>
+      <div *ngIf="courses.length === 0" class="empty-message">
+        <h1>Nincs találat a megadott szűrési feltételekkel.</h1>
+      </div>
+    </div>
   </div>
 </div>

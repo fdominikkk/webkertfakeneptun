@@ -1,5 +1,14 @@
 <div class="profile-container">
   <h1>Profil</h1>
+
+  <!-- Feedback messages -->
+  <mat-card *ngIf="errorMessage" class="feedback-card" [ngClass]="{'success': errorMessage.includes('sikeresen'), 'error': !errorMessage.includes('sikeresen')}">
+    <mat-card-content>
+      <mat-icon class="feedback-icon">{{ errorMessage.includes('sikeresen') ? 'check_circle' : 'error_outline' }}</mat-icon>
+      {{ errorMessage }}
+    </mat-card-content>
+  </mat-card>
+
   <mat-card class="profile-card">
     <mat-card-header>
       <mat-card-title>Személyes adatok</mat-card-title>
@@ -8,29 +17,39 @@
       <form [formGroup]="profileForm">
         <mat-form-field appearance="outline" class="form-field">
           <mat-label>Név</mat-label>
-          <input matInput formControlName="name" [readonly]="!isEditing">
+          <input matInput formControlName="name">
+          <mat-error *ngIf="profileForm.get('name')?.hasError('required')">Kötelező mező</mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="form-field">
           <mat-label>E-mail</mat-label>
-          <input matInput formControlName="email" [readonly]="!isEditing">
+          <input matInput formControlName="email" readonly>
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="form-field">
-          <mat-label>Diákazonosító</mat-label>
-          <input matInput formControlName="studentId" [readonly]="!isEditing">
+          <mat-label>Felhasználó típusa</mat-label>
+          <mat-select formControlName="userType">
+            <mat-option value="student">Diák</mat-option>
+            <mat-option value="teacher">Tanár</mat-option>
+          </mat-select>
+          <mat-error *ngIf="profileForm.get('userType')?.hasError('required')">Kötelező mező</mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="form-field">
-          <mat-label>Tanszék</mat-label>
-          <input matInput formControlName="department" [readonly]="!isEditing">
+          <mat-label>Kar</mat-label>
+          <mat-select formControlName="faculty">
+            <mat-option value="ttik">TTIK</mat-option>
+            <mat-option value="btk">BTK</mat-option>
+            <mat-option value="gtk">GTK</mat-option>
+          </mat-select>
+          <mat-error *ngIf="profileForm.get('faculty')?.hasError('required')">Kötelező mező</mat-error>
         </mat-form-field>
       </form>
     </mat-card-content>
     <mat-card-actions>
       <button *ngIf="!isEditing" mat-raised-button color="primary" (click)="enableEdit()">Profil szerkesztése</button>
       <ng-container *ngIf="isEditing">
-        <button mat-raised-button color="primary" (click)="saveProfile()">Mentés</button>
+        <button mat-raised-button color="primary" (click)="saveProfile()" [disabled]="profileForm.invalid">Mentés</button>
         <button mat-raised-button color="warn" (click)="cancelEdit()">Mégse</button>
       </ng-container>
     </mat-card-actions>

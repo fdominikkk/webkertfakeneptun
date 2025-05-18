@@ -1,0 +1,177 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "courses",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "credits",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "name",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "courses",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "day",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "faculty",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "semester",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "name",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "credits",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "courses",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "day",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "name",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "courses",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "day",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "name",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "credits",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "courses",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "day",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "semester",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "name",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "credits",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "courses",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "faculty",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "name",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "courses",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "faculty",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "name",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "credits",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "courses",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "name",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "credits",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "courses",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "semester",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "name",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "courses",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "semester",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "name",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "credits",
+          "order": "ASCENDING"
+        }
+      ]
+    }
+  ],
+  "fieldOverrides": []
+}

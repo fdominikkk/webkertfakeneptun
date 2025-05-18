@@ -1,73 +1,215 @@
-/* addlessons.component.css */
-.add-lessons-container {
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+/* Alapvető konténer */
+.lessons-container {
+  padding: 16px;
+  max-width: 1200px; /* Korlátozzuk az egész konténer szélességét */
+  margin: 0 auto; /* Középre igazítás */
 }
 
-.search-bar {
-  width: 100%;
-  max-width: 500px;
-  margin-bottom: 20px;
+/* Feedback card (hiba/sikeres üzenetek) */
+.feedback-card {
+  max-width: 800px;
+  margin: 16px auto;
+  padding: 8px;
+  border-radius: 8px; /* Finom lekerekítés */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Finom árnyék */
 }
 
-.subject-list {
+/* Filter card (szűrő űrlap) */
+.filter-card {
+  width: 100%; /* Teljes szélesség */
+  margin: 16px 0;
+  padding: 12px; /* Kisebb padding a kompaktabb megjelenésért */
+  box-sizing: border-box;
+  border-radius: 8px; /* Lekerekített sarkok */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Finom árnyék */
+}
+
+/* Szűrő űrlap címe és fejléce */
+.filter-card mat-card-header {
+  padding: 8px 12px; /* Kisebb padding a fejlécben */
+  background-color: #f5f5f5; /* Világos, harmonikus háttér */
+  border-radius: 8px 8px 0 0; /* Lekerekítés csak felül */
+}
+
+.filter-card mat-card-title {
+  font-size: 18px; /* Kisebb betűtípus */
+  font-weight: 500;
+  margin: 0; /* Margó eltávolítása */
+  color: #333; /* Sötétebb szöveg a kontrasztért */
+}
+
+/* Szűrő űrlap mezői */
+.filter-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 16px;
   justify-content: center;
 }
 
-.subject-card {
-  width: 300px;
-  background-color: #ffffff; 
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); 
-  border-radius: 8px;
-  transition: transform 0.2s; 
+.filter-row mat-form-field {
+  flex: 1 1 200px;
 }
 
-.subject-card:hover {
-  transform: translateY(-4px); 
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); 
-}
-
-mat-label {
-  color: black;
-}
-
-mat-card-header {
-  background-color: #f5f5f5; 
-  padding: 10px;
-}
-
-mat-card-content {
-  padding: 16px;
-  color: #333333; 
-}
-
-mat-card-actions {
+.filter-actions {
+  margin-top: 12px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 16px;
+  gap: 8px;
+  justify-content: flex-end;
 }
 
-mat-form-field {
-  margin-top: 10px;
+/* Course creation form card (új kurzus űrlap) */
+.course-form-card {
+  max-width: 800px;
+  margin: 16px auto;
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Új kurzus űrlap címe és fejléce */
+.course-form-card mat-card-header {
+  padding: 8px 12px;
+  background-color: #f5f5f5;
+  border-radius: 8px 8px 0 0;
+}
+
+.course-form-card mat-card-title {
+  font-size: 18px;
+  font-weight: 500;
+  margin: 0;
+  color: #333;
+}
+
+/* Új kurzus űrlap mezői */
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+}
+
+.form-row mat-form-field {
+  flex: 1 1 200px;
+}
+
+.form-actions {
+  margin-top: 12px;
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+textarea {
+  min-height: 100px;
+}
+
+/* Cím (Tárgyak Felvétele) */
+h1 {
+  margin: 16px 0 8px 0; /* Előzőleg csökkentett margó */
+  text-align: center;
+  font-size: 24px; /* Kisebb, harmonikus betűtípus */
+  font-weight: 500;
+  color: #333;
+}
+
+/* Course list (kurzus kártyák) */
+.subject-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+  margin-top: 0;
+}
+
+/* Kurzus kártyák */
+.subject-card {
+  max-width: 400px; /* Megfelelő méret, változatlan */
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 8px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Kurzus kártya címe és fejléce */
+.subject-card mat-card-header {
+  padding: 8px 12px; /* Kisebb padding */
+  background-color: #fafafa; /* Világos háttér */
+  border-radius: 8px 8px 0 0;
+}
+
+.subject-card mat-card-title {
+  font-size: 16px; /* Kisebb betűtípus a kurzus nevéhez */
+  font-weight: 500;
+  margin: 0;
+  color: #333;
+}
+
+.subject-card mat-card-content p {
+  margin: 8px 0;
+  color: white; /* Fehér szöveg */
+}
+
+.subject-card mat-card-actions {
+  justify-content: flex-end;
+  padding: 8px 12px;
+}
+
+/* Üres állapot üzenet */
+.empty-message {
+  text-align: center;
+  margin: 16px 0;
   width: 100%;
 }
 
-.highlight {
-  background-color: #ffff99 !important; 
-  font-weight: bold;
-  padding: 2px; 
+/* Betöltés spinner */
+.loading-spinner {
+  margin: 16px auto;
+  display: block;
 }
 
-.no-results {
-  color: black;
-  font-size : 20px;
-  font-weight: bold;
-  text-align: center;
-  margin: 20px 0;
+/* Reszponzív dizájn kisebb képernyőkre */
+@media (max-width: 600px) {
+  .lessons-container {
+    padding: 8px;
+  }
+
+  .filter-card,
+  .course-form-card,
+  .feedback-card {
+    width: 100%;
+    margin: 8px 0;
+    padding: 8px;
+  }
+
+  .filter-card mat-card-header,
+  .course-form-card mat-card-header,
+  .subject-card mat-card-header {
+    padding: 6px 8px; /* Még kisebb padding mobil nézetben */
+  }
+
+  .filter-card mat-card-title,
+  .course-form-card mat-card-title {
+    font-size: 16px; /* Kisebb betűtípus */
+  }
+
+  .subject-card mat-card-title {
+    font-size: 14px;
+  }
+
+  .filter-row mat-form-field,
+  .form-row mat-form-field {
+    flex: 1 1 100%;
+  }
+
+  .subject-card {
+    max-width: 100%;
+    margin: 0 8px;
+  }
+
+  h1 {
+    margin: 8px 0 4px 0;
+    font-size: 20px;
+  }
 }

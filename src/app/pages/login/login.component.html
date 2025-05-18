@@ -1,1 +1,28 @@
-<p>login works!</p>
+<div class="login-container">
+  <h1>Bejelentkezés</h1>
+  <mat-card *ngIf="successMessage || errorMessage" class="feedback-card" [ngClass]="{'success': successMessage, 'error': errorMessage}">
+    <mat-card-content>
+      <mat-icon class="feedback-icon">{{ successMessage ? 'check_circle' : 'error_outline' }}</mat-icon>
+      {{ successMessage || errorMessage }}
+    </mat-card-content>
+  </mat-card>
+  <form (ngSubmit)="onLogin()">
+    <mat-form-field appearance="outline" class="form-field">
+      <mat-label>Email</mat-label>
+      <input matInput type="email" [(ngModel)]="email" name="email" placeholder="Pl. pelda@email.com" required>
+      <mat-error *ngIf="!email">Az email kötelező</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="form-field">
+      <mat-label>Jelszó</mat-label>
+      <input matInput type="password" [(ngModel)]="password" name="password" required>
+      <mat-error *ngIf="!password">A jelszó kötelező</mat-error>
+    </mat-form-field>
+    <div class="form-actions">
+      <button mat-raised-button color="primary" type="submit">
+        <mat-icon>login</mat-icon>
+        Bejelentkezés
+      </button>
+    </div>
+  </form>
+  <p><strong>Még nincs fiókod?</strong> <a routerLink="/register">Regisztrálj!</a></p>
+</div>

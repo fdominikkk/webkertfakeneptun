@@ -1,1 +1,50 @@
-<p>registration works!</p>
+<div class="register-container">
+  <h1>Regisztráció</h1>
+  <mat-card *ngIf="successMessage || errorMessage" class="feedback-card" [ngClass]="{'success': successMessage, 'error': errorMessage}">
+    <mat-card-content>
+      <mat-icon class="feedback-icon">{{ successMessage ? 'check_circle' : 'error_outline' }}</mat-icon>
+      {{ successMessage || errorMessage }}
+    </mat-card-content>
+  </mat-card>
+  <form>
+    <mat-form-field appearance="outline" class="form-field">
+      <mat-label>Név</mat-label>
+      <input matInput [(ngModel)]="name" name="name" placeholder="Pl. Kovács János" required>
+      <mat-error *ngIf="!name">A név kötelező</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="form-field">
+      <mat-label>Email</mat-label>
+      <input matInput [(ngModel)]="email" name="email" type="email" placeholder="Pl. pelda@email.com" required>
+      <mat-error *ngIf="!email">Az email kötelező</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="form-field">
+      <mat-label>Jelszó</mat-label>
+      <input matInput [(ngModel)]="password" name="password" type="password" required>
+      <mat-error *ngIf="!password">A jelszó kötelező</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="form-field">
+      <mat-label>Felhasználó típusa</mat-label>
+      <mat-select [(ngModel)]="userType" name="userType" required>
+        <mat-option value="student">Diák</mat-option>
+        <mat-option value="teacher">Tanár</mat-option>
+      </mat-select>
+      <mat-error *ngIf="!userType">A felhasználó típusa kötelező</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="form-field">
+      <mat-label>Kar</mat-label>
+      <mat-select [(ngModel)]="faculty" name="faculty" required>
+        <mat-option value="ttik">TTIK</mat-option>
+        <mat-option value="btk">BTK</mat-option>
+        <mat-option value="gtk">GTK</mat-option>
+      </mat-select>
+      <mat-error *ngIf="!faculty">A kar kiválasztása kötelező</mat-error>
+    </mat-form-field>
+    <div class="form-actions">
+      <button mat-raised-button color="primary" (click)="onRegister()">
+        <mat-icon>person_add</mat-icon>
+        Regisztráció
+      </button>
+    </div>
+  </form>
+  <p><strong>Már van fiókod?</strong> <a routerLink="/login">Jelentkezz be!</a></p>
+</div>

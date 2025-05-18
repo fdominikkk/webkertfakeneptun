@@ -1,57 +1,140 @@
+/* Alapvető konténer */
 .profile-container {
-  padding: 20px;
+  padding: 16px;
   max-width: 800px;
   margin: 0 auto;
-  background-color: #f5f5f5; 
+  background-color: #f5f5f5; /* Világos háttér, mint addlessons.component */
 }
 
-
+/* Profil kártya */
 .profile-card {
   width: 100%;
   max-width: 400px;
-  background-color: #ffffff; 
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin: 0 auto;
+  margin: 16px auto;
+  background-color: #ffffff;
+  border: 2px solid #003087; /* Egyetemi kék keret */
+  border-radius: 8px; /* Lekerekített sarkok */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Finom árnyék */
+  color: #333; /* Alap szövegszín, felülírja a korábbi color: white-t */
+}
+
+/* Feedback kártya */
+.feedback-card {
+  max-width: 400px;
+  margin: 16px auto;
+  padding: 8px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.feedback-card.success {
+  background-color: #d4edda; /* Zöld sikeres üzenethez */
+  color: #155724;
+}
+
+.feedback-card.error {
+  background-color: #f8d7da; /* Piros hibaüzenethez */
+  color: #721c24;
+}
+
+.feedback-card mat-icon {
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+/* Cím */
+h1 {
+  margin: 16px 0 8px 0; /* Ugyanaz, mint addlessons.component */
+  text-align: center;
+  font-size: 24px;
+  font-weight: 500;
+  color: #333;
+}
+
+/* Kártya címe */
+mat-card-header {
+  padding: 8px 12px;
+  background-color: #f5f5f5; /* Világos háttér, mint addlessons.component */
+  border-radius: 8px 8px 0 0;
 }
 
 mat-card-title {
-  font-size: 20px;
-  font-weight: bold;
-  color: #000000; 
+  font-size: 18px; /* Kisebb, mint korábban (20px) */
+  font-weight: 500;
+  color: #333;
+  margin: 0;
 }
 
+/* Űrlap tartalom */
 mat-card-content {
   padding: 16px;
 }
 
+/* Űrlap mezők */
 .form-field {
   width: 100%;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 
 mat-form-field {
-  color: #000000; 
+  color: #333; /* Sötét szöveg az olvashatóságért */
 }
 
 mat-label {
-  color: #000000; 
+  color: #333; /* Sötét címke */
 }
 
 input[matInput] {
-  color: #000000;
+  color: #333; /* Sötét szöveg az inputokban */
 }
 
 input[matInput][readonly] {
-  color: #000000;
+  color: #666; /* Halványabb szürke a readonly mezőhöz */
+  background-color: #f5f5f5; /* Világos háttér a readonly mezőhöz */
 }
 
+mat-select {
+  color: #333; /* Sötét szöveg a select mezőkben */
+}
+
+/* Gombok */
 mat-card-actions {
   display: flex;
   justify-content: center;
-  padding: 8px;
+  padding: 8px 12px;
   gap: 8px;
 }
 
+mat-raised-button {
+  font-size: 14px;
+}
 
+/* Reszponzív dizájn */
+@media (max-width: 600px) {
+  .profile-container {
+    padding: 8px;
+  }
 
+  .profile-card,
+  .feedback-card {
+    max-width: 100%;
+    margin: 8px;
+  }
 
+  h1 {
+    font-size: 20px;
+    margin: 8px 0 4px 0;
+  }
+
+  mat-card-title {
+    font-size: 16px;
+  }
+
+  mat-card-header {
+    padding: 6px 8px;
+  }
+
+  mat-card-content {
+    padding: 12px;
+  }
+}

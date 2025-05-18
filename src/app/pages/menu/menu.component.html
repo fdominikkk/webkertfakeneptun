@@ -3,9 +3,19 @@
     <h2>Fake-Neptun</h2>
   </div>
   <ul>
-    <li [class.active]="currentPage === 'home'" (click)="menuSwitch('home')">Főoldal</li>
-    <li [class.active]="currentPage === 'addlessons'" (click)="menuSwitch('addlessons')">Tárgyfelvétel</li>
-    <li [class.active]="currentPage === 'lessons'" (click)="menuSwitch('lessons')">Felvett Tárgyak</li>
-    <li [class.active]="currentPage === 'profile'" (click)="menuSwitch('profile')">Profil</li>
+    <!-- Bejelentkezett felhasználóknak látható menüpontok -->
+    <ng-container *ngIf="isAuthenticated$ | async; else notAuthenticated">
+      <li [class.active]="currentPage === 'home'" (click)="menuSwitch('home')">Főoldal</li>
+      <li [class.active]="currentPage === 'addlessons'" (click)="menuSwitch('addlessons')">Tárgyfelvétel</li>
+      <li *ngIf="userType === 'student'" [class.active]="currentPage === 'lessons'" (click)="menuSwitch('lessons')">Felvett Tárgyak</li>
+      <li [class.active]="currentPage === 'profile'" (click)="menuSwitch('profile')">Profil</li>
+      <li [class.active]="currentPage === 'logout'" (click)="menuSwitch('logout')">Kijelentkezés</li>
+    </ng-container>
+
+    <!-- Nem bejelentkezett felhasználóknak látható menüpontok -->
+    <ng-template #notAuthenticated>
+      <li [class.active]="currentPage === 'register'" (click)="menuSwitch('register')">Regisztráció</li>
+      <li [class.active]="currentPage === 'login'" (click)="menuSwitch('login')">Bejelentkezés</li>
+    </ng-template>
   </ul>
 </nav>
